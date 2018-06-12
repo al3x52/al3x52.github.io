@@ -1,20 +1,20 @@
 <html>
-<head>
-    <script>
-        function testUsb(){
-            navigator.usb.requestDevice({ filters: [{ vendorId: 0x2341 }] })
-                .then(device => {
-                console.log(device.productName);      // "Arduino Micro"
-                console.log(device.manufacturerName); // "Arduino LLC"
-                })
-                .catch(error => { console.log(error); });
-        }
-</script>
-</head>
-<body>
-        Hello World
+    <head>
+        <script>
+            function testUsb(){
+                navigator.usb.requestDevice({ filters: [{ vendorId: 0x2341 }] })
+                    .then(device => {
+                        console.log(device.productName);      // "Arduino Micro"
+                        console.log(device.manufacturerName); // "Arduino LLC"
+                    })
+                    .catch(error => { console.log(error); });
+            }
+        </script>
+    </head>
+    <body>
+            Hello World
 
-        <button onclick="testUsb()">usb</button>
+            <button onclick="testUsb()">usb</button>
 
-</body>
+    </body>
 </html>
