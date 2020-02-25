@@ -1,5 +1,35 @@
 <html>
     <head>
+        <title>Butt hours calculator</title>
+    </head>
+    <body>
+      <table>
+        <tr>
+          <td>AM in</td>
+          <td><input id="am_in" value="9:00"></td>
+        </tr>
+        <tr>
+          <td>AM out</td>
+          <td><input id="am_out" value="12:00"></td>
+        </tr>
+        <tr>
+          <td>AM time</td>
+          <td><input id="am_time" disabled></td>
+        </tr>
+        <tr>
+          <td>Remaining</td>
+          <td><input id="day_remaining" disabled></td>
+        </tr>
+        <tr>
+          <td>PM in</td>
+          <td><input id="pm_in" value="12:30"></td>
+        </tr>
+        <tr>
+          <td>PM out <input type=button value="calc" id="bt_calc"></td>
+          <td><input id="pm_out" disabled></td>
+        </tr>
+      </table>
+        
         <script>
           /**
            * returns the number of hours:minutes (formatted "HH:mm") 
@@ -64,33 +94,5 @@
 
           main();
         </script>
-    </head>
-    <body>
-      <table>
-        <tr>
-          <td>AM in</td>
-          <td><input id="am_in" value="9:00"></td>
-        </tr>
-        <tr>
-          <td>AM out</td>
-          <td><input id="am_out" value="12:00"></td>
-        </tr>
-        <tr>
-          <td>AM time</td>
-          <td><input id="am_time" disabled></td>
-        </tr>
-        <tr>
-          <td>Remaining</td>
-          <td><input id="day_remaining" disabled></td>
-        </tr>
-        <tr>
-          <td>PM in</td>
-          <td><input id="pm_in" value="12:30"></td>
-        </tr>
-        <tr>
-          <td>PM out <input type=button value="calc" id="bt_calc"></td>
-          <td><input id="pm_out" disabled></td>
-        </tr>
-      </table>
     </body>
 </html>    
