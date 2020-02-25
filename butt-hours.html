@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <script>
+          /**
+           * returns the number of hours:minutes (formatted "HH:mm") 
+           *         between start hours:minutes and end hours:minutes
+           */
+          function diff(start, end) {
+              var startDate = new Date("1970-1-1 "+ start);
+              var endDate = new Date("1970-1-1 "+ end);
+              var diff = endDate.getTime() - startDate.getTime();
+              var hours = Math.floor(diff / 1000 / 60 / 60);
+              diff -= hours * 1000 * 60 * 60;
+              var minutes = Math.floor(diff / 1000 / 60);
+
+              return padZero(hours) + ":" + padZero(minutes);
+          }
+
+          function padZero(value){
+            return (value < 9 ? "0" : "") + value
+          }
+
+          /**
+           * calcul temps passé le matin
+           */
+          function getAMTime(){
+            var am_in = document.getElementById("am_in").value;
+            var am_out = document.getElementById("am_out").value;	  
+            return diff(am_in, am_out);    
+          }
+
+          /**
+           * calcul du temps restant de l'apres midi
+           */
+          function getRemainingDayTime(am_time){
+           return diff(am_time, "08:00");
+          }
+
+          function getPMOutTime(remaining_day_time){
+            var pm_in = document.getElementById("pm_in").value;
+            var pm_in_split = pm_in.split(":");
+            var remaining_day_time_split = remaining_day_time.split(":");
+            //use UTC to avoid timezone in pm_out
+            var pm_outTime = new Date(Date.UTC(1970, 1, 1, pm_in_split[0], pm_in_split[1])).getTime()
+            + new Date(Date.UTC(1970, 1, 1, remaining_day_time_split[0], remaining_day_time_split[1])).getTime();
+
+            var pm_outDate = new Date();
+            pm_outDate.setTime(pm_outTime);
+
+            return padZero(pm_outDate.getUTCHours()) +":"+ padZero(pm_outDate.getUTCMinutes());
+          }
+
+          function main(){
+            var am_time = getAMTime();
+            document.getElementById("am_time").value = am_time;
+
+            var remaining_day_time = getRemainingDayTime(am_time)
+            document.getElementById("day_remaining").value = remaining_day_time;
+
+            document.getElementById("pm_out").value = getPMOutTime(remaining_day_time);
+          }
+
+          document.getElementById("bt_calc").onclick = main;
+
+          main();
+        </script>
+    </head>
+    <body>
+      <table>
+        <tr>
+          <td>AM in</td>
+          <td><input id="am_in" value="9:00"></td>
+        </tr>
+        <tr>
+          <td>AM out</td>
+          <td><input id="am_out" value="12:00"></td>
+        </tr>
+        <tr>
+          <td>AM time</td>
+          <td><input id="am_time" disabled></td>
+        </tr>
+        <tr>
+          <td>Remaining</td>
+          <td><input id="day_remaining" disabled></td>
+        </tr>
+        <tr>
+          <td>PM in</td>
+          <td><input id="pm_in" value="12:30"></td>
+        </tr>
+        <tr>
+          <td>PM out <input type=button value="calc" id="bt_calc"></td>
+          <td><input id="pm_out" disabled></td>
+        </tr>
+      </table>
+    </body>
+</html>    
